@@ -1,0 +1,130 @@
+<!-- NAVBAR CONTAINER -->
+<nav class="w-full bg-[#F5ECDE] px-10 md:px-20 py-4 pt-10 flex items-center justify-between">
+
+  <!-- LOGO -->
+  <img src="assets/images/logo-vera.png" class="h-7" />
+
+  <!-- DESKTOP MENU -->
+  <div class="hidden md:flex items-center gap-10 text-[15px] text-black">
+
+    <a href="#" class="hover:underline">Comment ça marche ?</a>
+    <a href="#" class="hover:underline">Rencontrez l’équipe</a>
+    <a href="#" class="hover:underline">FAQ</a>
+
+    <!-- BOUTON PARLER À VERA -->
+    <button class="bg-black text-white px-6 py-2 rounded-full text-[15px]">
+      Parler à Vera
+    </button>
+
+    <!-- LANG SWITCH DESKTOP -->
+    <div class="flex items-center gap-2 text-[14px] tracking-wide">
+
+      <!-- FR -->
+      <span
+        class="cursor-pointer pb-[2px]"
+        [class.border-b-2]="lang.currentLang() === 'fr'"
+        [class.border-black]="lang.currentLang() === 'fr'"
+        (click)="lang.setLang('fr')"
+      >
+        FR
+      </span>
+
+      <span class="opacity-50">/</span>
+
+      <!-- EN -->
+      <span
+        class="cursor-pointer pb-[2px]"
+        [class.border-b-2]="lang.currentLang() === 'en'"
+        [class.border-black]="lang.currentLang() === 'en'"
+        (click)="lang.setLang('en')"
+      >
+        ENG
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- BURGER MOBILE -->
+  <button
+    (click)="toggleMenu()"
+    class="md:hidden text-5xl font-light"
+  >
+    ☰
+  </button>
+
+</nav>
+
+
+
+<!-- ----------------------------- -->
+<!--        MOBILE OVERLAY         -->
+<!-- ----------------------------- -->
+<div
+  *ngIf="menuOpen()"
+  class="fixed inset-0 w-full h-[70%] bg-[#F5ECDE] z-50 px-6 pt-6 overflow-y-auto"
+>
+
+  <!-- HEADER MOBILE -->
+  <div class="flex items-center justify-between">
+    <img src="assets/images/logo-vera.png" class="h-7 mt-1" />
+
+    <button
+      (click)="closeMenu()"
+      class="text-4xl font-light leading-none"
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- LANG SWITCH MOBILE -->
+  <div class="mt-6 flex justify-center gap-3 text-[15px] tracking-wide items-center">
+
+    <span
+      class="cursor-pointer pb-[2px]"
+      [ngClass]="{ 'border-b-2 border-black' : lang.currentLang() === 'fr' }"
+
+      [class.border-black]="lang.currentLang() === 'fr'"
+      (click)="lang.setLang('fr')"
+    >
+      FR
+    </span>
+
+    <span class="opacity-50">/</span>
+
+    <span
+      class="cursor-pointer pb-[2px]"
+      [class.border-b-2]="lang.currentLang() === 'en'"
+      [class.border-black]="lang.currentLang() === 'en'"
+      (click)="lang.setLang('en')"
+    >
+      ENG
+    </span>
+
+  </div>
+
+  <!-- MENU LINKS -->
+  <div class="mt-10 flex flex-col items-center gap-8 text-lg">
+    <a (click)="closeMenu()" class="hover:underline">Comment ça marche ?</a>
+    <a (click)="closeMenu()" class="hover:underline">Rencontrez l’équipe</a>
+    <a (click)="closeMenu()" class="hover:underline">FAQ</a>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="mt-12 flex flex-col items-center gap-5 pb-20">
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Appeler Vera
+    </button>
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Parler sur Instagram
+    </button>
+
+    <button class="w-64 py-3 bg-black text-white rounded-full">
+      Parler sur WhatsApp
+    </button>
+
+  </div>
+
+</div>

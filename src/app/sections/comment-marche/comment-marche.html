@@ -1,0 +1,125 @@
+<section class="bg-[#CDE9B8] px-6 py-20">
+  <div class="max-w-3xl mx-auto">
+
+    <!-- TITRE -->
+    <p class="text-center text-gray-700 text-sm mb-2">
+      {{ lang.t('comment.howItWorks') }}
+    </p>
+
+    <h2 class="text-center text-[32px] font-lastik mb-20 leading-tight">
+      {{ lang.t('comment.askQuestion') }}
+      <span class="bg-white px-3 py-1">
+        {{ lang.t('comment.byPhoneOrSocial') }}
+      </span>
+    </h2>
+
+    <!-- ⚡ DESKTOP VERSION -->
+    <div class="hidden md:grid md:grid-cols-3 items-start gap-10">
+
+      <!-- 🟩 COLONNE GAUCHE -->
+      <div class="flex flex-col items-center">
+
+        <img src="assets/images/comment/telephones_2.png" class="w-[260px] mb-10"/>
+
+        <p class="text-[26px] font-lastik mb-6">
+          {{ lang.t('comment.addVera') }}
+        </p>
+
+        <div class="relative flex flex-col items-center gap-5">
+
+          <img src="assets/images/comment/etincelle.png"
+               class="absolute left-[-90px] top-[90px] w-[100px]"/>
+
+          <button class="w-[260px] py-3 bg-black text-white rounded-full text-[18px]">
+            {{ lang.t('comment.showNumber') }}
+          </button>
+
+          <button class="w-[260px] py-3 bg-[#EFE8D9] border border-black rounded-full text-[18px]">
+            Instagram
+          </button>
+
+        </div>
+      </div>
+
+      <!-- 🟧 COLONNE CENTRALE -->
+      <div class="flex flex-col items-center gap-20">
+        <img src="assets/images/comment/fleche_1.png" class="w-[160px]"/>
+        <img src="assets/images/comment/fleche_2.png" class="w-[160px]"/>
+      </div>
+
+      <!-- 🟦 COLONNE DROITE -->
+      <div class="flex flex-col items-center gap-16 mt-[20px]">
+
+        <div class="flex flex-col items-center">
+          <img src="assets/images/comment/personnage_telephone.png" class="w-[70px] mb-3"/>
+          <p class="text-[22px] text-center leading-tight font-lastik">
+            {{ lang.t('comment.callHer') }} <br />
+            {{ lang.t('comment.byPhone') }}
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <img src="assets/images/comment/messages.png" class="w-[150px] mb-3"/>
+          <p class="text-[22px] text-center leading-tight font-lastik">
+            {{ lang.t('comment.writeHer') }} <br />
+            {{ lang.t('comment.onWhatsInstagram') }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ⭐ MOBILE VERSION -->
+    <div class="flex flex-col md:hidden items-center gap-4">
+
+      <p class="text-[20px] font-lastik text-center">
+        {{ lang.t('comment.addVera') }}
+      </p>
+
+      <div class="relative flex flex-row items-center justify-center gap-3 w-full">
+
+        <img src="assets/images/comment/etincelle.png" class="hidden"/>
+
+        <button class="w-[150px] py-2 bg-black text-white rounded-full text-[12px]">
+          {{ lang.t('comment.showNumber') }}
+        </button>
+
+        <button class="w-[150px] py-2 bg-[#EFE8D9] border border-black rounded-full text-[12px]">
+          Instagram
+        </button>
+
+      </div>
+
+      <div class="flex flex-row justify-center gap-6 mt-10 w-full items-center">
+
+        <img src="assets/images/comment/telephones_2.png" class="w-[190px] mt-4"/>
+
+        <div class="flex flex-col items-start gap-8">
+
+          <div class="flex flex-col items-start">
+            <img src="assets/images/comment/personnage_telephone.png"
+                 class="w-[45px] mb-1"/>
+            <p class="text-[16px] leading-tight font-lastik">
+              {{ lang.t('comment.callHer') }} <br />
+              {{ lang.t('comment.byPhone') }}
+            </p>
+          </div>
+
+          <div class="flex flex-col items-start">
+            <img src="assets/images/comment/messages.png" class="w-[100px] mb-1"/>
+            <p class="text-[16px] leading-tight font-lastik">
+              {{ lang.t('comment.writeHer') }} <br />
+              {{ lang.t('comment.onWhatsInstagram') }}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

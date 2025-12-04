@@ -1,0 +1,158 @@
+<section class="bg-[#CDE9B8] px-6 py-12">
+
+  <!-- TITRE -->
+  <h2 class="text-center text-black text-[32px] md:text-[42px] font-semibold leading-tight mb-10">
+    {{ t('fact.title1') }}<br />
+    <span class="bg-white px-2 rounded"> {{ t('fact.title2') }} </span><br />
+    <span class="bg-white px-3 rounded"> {{ t('fact.title3') }} </span>
+  </h2>
+
+
+  <!-- 🖥 DESKTOP LOGOS -->
+  <div class="hidden md:flex flex-col items-center gap-8 mb-16">
+
+    <div class="flex justify-center items-center gap-12">
+      <img src="assets/images/fact_checking/science.png" class="h-10" />
+      <img src="assets/images/fact_checking/snopes.png" class="h-10" />
+      <img src="assets/images/fact_checking/verifica.png" class="h-10" />
+      <img src="assets/images/fact_checking/oeil.png" class="h-12" />
+      <img src="assets/images/fact_checking/cw.png" class="h-12" />
+      <img src="assets/images/fact_checking/afp.png" class="h-10" />
+    </div>
+
+    <div class="flex justify-center items-center gap-12">
+      <img src="assets/images/fact_checking/surligners.png" class="h-10" />
+      <img src="assets/images/fact_checking/dw.jpg" class="h-10" />
+      <img src="assets/images/fact_checking/aos.png" class="h-10" />
+      <img src="assets/images/fact_checking/climate.png" class="h-10" />
+      <img src="assets/images/fact_checking/africa.png" class="h-10" />
+      <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
+    </div>
+
+  </div>
+
+
+  <!-- 📱 MOBILE MARQUEE -->
+  <div class="mt-8 overflow-hidden md:hidden mb-16">
+    <div class="flex items-center gap-10 animate-marquee">
+
+      <!-- Logos -->
+      <img src="assets/images/fact_checking/science.png" class="h-10" />
+      <img src="assets/images/fact_checking/snopes.png" class="h-10" />
+      <img src="assets/images/fact_checking/verifica.png" class="h-10" />
+      <img src="assets/images/fact_checking/oeil.png" class="h-10" />
+      <img src="assets/images/fact_checking/cw.png" class="h-10" />
+      <img src="assets/images/fact_checking/surligners.png" class="h-10" />
+      <img src="assets/images/fact_checking/dw.jpg" class="h-10" />
+      <img src="assets/images/fact_checking/aos.png" class="h-10" />
+      <img src="assets/images/fact_checking/climate.png" class="h-10" />
+      <img src="assets/images/fact_checking/africa.png" class="h-10" />
+      <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
+      <img src="assets/images/fact_checking/afp.png" class="h-10" />
+
+      <!-- 2e passe -->
+      <img src="assets/images/fact_checking/science.png" class="h-10" />
+      <img src="assets/images/fact_checking/snopes.png" class="h-10" />
+      <img src="assets/images/fact_checking/verifica.png" class="h-10" />
+      <img src="assets/images/fact_checking/oeil.png" class="h-10" />
+      <img src="assets/images/fact_checking/cw.png" class="h-10" />
+      <img src="assets/images/fact_checking/surligners.png" class="h-10" />
+      <img src="assets/images/fact_checking/dw.jpg" class="h-10" />
+      <img src="assets/images/fact_checking/aos.png" class="h-10" />
+      <img src="assets/images/fact_checking/climate.png" class="h-10" />
+      <img src="assets/images/fact_checking/africa.png" class="h-10" />
+      <img src="assets/images/fact_checking/press_trust.png" class="h-10" />
+      <img src="assets/images/fact_checking/afp.png" class="h-10" />
+
+    </div>
+  </div>
+
+
+
+  <!-- ========================================================= -->
+  <!-- 🔵 CARDS -->
+  <!-- ========================================================= -->
+
+  <div class="flex flex-col md:flex-row md:justify-center md:items-start md:gap-12">
+
+
+    <!-- CARD 1 -->
+    <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
+                max-w-[550px] md:w-[550px]">
+
+      <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
+                  border-[3px] border-[#4BA3F0] -z-10"></div>
+
+      <div class="absolute inset-0 rounded-2xl opacity-10"
+           style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
+
+      <div class="relative">
+
+        <h3 class="text-[28px] font-semibold mb-4 text-black">
+          {{ t('fact.card1_title') }}
+        </h3>
+
+        <p class="text-[17px] text-gray-900 mb-4">
+          {{ t('fact.card1_sub') }}
+        </p>
+
+        <ul class="space-y-4 text-[17px]">
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card1_point1') }}
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card1_point2') }}
+          </li>
+        </ul>
+
+        <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
+          {{ t('fact.showSources') }}
+        </button>
+
+      </div>
+    </div>
+
+
+    <!-- CARD 2 -->
+    <div class="relative bg-[#F7F1E6] rounded-2xl p-8 mb-12 border-[3px] border-black 
+                max-w-[550px] md:w-[550px]">
+
+      <div class="absolute bottom-[-6px] right-[-6px] w-full h-full rounded-2xl
+                  border-[3px] border-[#4BA3F0] -z-10"></div>
+
+      <div class="absolute inset-0 rounded-2xl opacity-10"
+           style="background-image: url('assets/images/fact_checking/background.png'); background-size: cover;"></div>
+
+      <div class="relative">
+
+        <h3 class="text-[28px] font-semibold mb-4 text-black">
+          {{ t('fact.card2_title') }}
+        </h3>
+
+        <p class="text-[17px] text-gray-900 mb-4">
+          {{ t('fact.card2_sub') }}
+        </p>
+
+        <ul class="space-y-4 text-[17px]">
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card2_point1') }}
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-xl">✓</span>
+            {{ t('fact.card2_point2') }}
+          </li>
+        </ul>
+
+        <button class="mt-6 w-full bg-black text-white text-lg py-4 rounded-full">
+          {{ t('fact.showSources') }}
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+</section>
