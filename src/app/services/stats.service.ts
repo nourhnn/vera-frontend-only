@@ -1,43 +1,30 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
+// 🔹 Une entrée simple (valeur + nombre d'occurrences)
 export interface SingleChoiceEntry {
   value: string;
   count: number;
 }
 
-export interface ScaleStat {
-  avg: number | null;
-  min: number | null;
-  max: number | null;
-}
-
 export interface DailyCount {
-  date: string; // YYYY-MM-DD
+  date: string; // ISO string envoyée par le back
   count: number;
 }
 
+// 🔹 Doit être compatible avec ce que tu utilises dans SurveyStatsComponent
 export interface StatsOverview {
+  trueCount: number;
+  falseCount: number;
+  totalCount: number;
+
   totalResponses: number;
-  singleChoice: Record<string, SingleChoiceEntry[]>;
-  scales: Record<string, ScaleStat>;
-  multiChoice: Record<string, Record<string, number>>;
-  dailyCounts?: DailyCount[];
-  generatedAt: string;
-}
+  dailyCounts: DailyCount[];
 
-const DEFAULT_API_BASE_URL = 'http://localhost:3000/api';
-
-function resolveApiBaseUrl(): string {
-  const env = (import.meta as any).env || {};
-  const candidate = env['NG_APP_API_BASE_URL'] ?? env['NG_APP_API_URL'];
-
-  if (typeof candidate === 'string' && candidate.trim().length > 0) {
-    return candidate.replace(/\/$/, '');
-  }
-
-  return DEFAULT_API_BASE_URL;
+  // Tu peux avoir d'autres champs selon ton back, on les laisse ouverts
+  [key: string]: any;
 }
 
 @Injectable({
@@ -45,30 +32,41 @@ function resolveApiBaseUrl(): string {
 })
 export class StatsService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = resolveApiBaseUrl();
 
+  // En dev  : http://localhost:3000/api
+  // En prod : https://vera-groupe-2.onrender.com/api
+  private readonly baseUrl = environment.apiUrl;
+
+  /** Récupère un snapshot des stats (pour loadSnapshot) */
   fetchOverview(): Observable<StatsOverview> {
     return this.http.get<StatsOverview>(`${this.baseUrl}/stats/overview`);
   }
 
+  /** Écoute le flux temps réel via Server-Sent Events (pour listenToStream) */
   listenToStream(): Observable<StatsOverview> {
-    return new Observable<StatsOverview>((observer) => {
-      const source = new EventSource(`${this.baseUrl}/stats/stream`);
+    return new Observable<StatsOverview>((subscriber) => {
+      const url = `${this.baseUrl}/stats/stream`;
+      const source = new EventSource(url);
 
       source.onmessage = (event) => {
         try {
-          const parsed = JSON.parse(event.data);
-          observer.next(parsed);
-        } catch (err) {
-          console.error('Impossible de parser les données de stats', err);
+          const data = JSON.parse(event.data) as StatsOverview;
+          subscriber.next(data);
+        } catch (e) {
+          console.error('[StatsService] erreur parse stream', e);
         }
       };
 
       source.onerror = (err) => {
-        observer.error(err);
+        console.error('[StatsService] stream error', err);
+        source.close();
+        subscriber.error(err);
       };
 
-      return () => source.close();
+      // cleanup quand l'observable est unsubscribed
+      return () => {
+        source.close();
+      };
     });
   }
 }
