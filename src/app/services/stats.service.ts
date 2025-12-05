@@ -1,20 +1,18 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
-// 🔹 Une entrée simple (valeur + nombre d'occurrences)
 export interface SingleChoiceEntry {
   value: string;
   count: number;
 }
 
 export interface DailyCount {
-  date: string; // ISO string envoyée par le back
+  date: string;
   count: number;
 }
 
-// 🔹 Doit être compatible avec ce que tu utilises dans SurveyStatsComponent
+// ✅ Version alignée avec ce que ton template utilise
 export interface StatsOverview {
   trueCount: number;
   falseCount: number;
@@ -23,8 +21,27 @@ export interface StatsOverview {
   totalResponses: number;
   dailyCounts: DailyCount[];
 
-  // Tu peux avoir d'autres champs selon ton back, on les laisse ouverts
-  [key: string]: any;
+  // ex : data.scales['satisfaction_vera'].avg
+  scales: {
+    [key: string]: {
+      avg: number | null;
+      count?: number;
+      [key: string]: any;
+    };
+  };
+
+  // ex : data.singleChoice['age_tranche']
+  singleChoice: {
+    [key: string]: SingleChoiceEntry[];
+  };
+
+  // ex : toEntryList(data.multiChoice['contenu_rs'] || {})
+  multiChoice: {
+    [key: string]: Record<string, number>;
+  };
+
+  // ex : this.overview()?.generatedAt
+  generatedAt: string;
 }
 
 @Injectable({
@@ -33,20 +50,16 @@ export interface StatsOverview {
 export class StatsService {
   private readonly http = inject(HttpClient);
 
-  // En dev  : http://localhost:3000/api
-  // En prod : https://vera-groupe-2.onrender.com/api
-  private readonly baseUrl = environment.apiUrl;
+  // 🔥 Direct Render
+  private readonly baseUrl = 'https://vera-groupe-2.onrender.com/api';
 
-  /** Récupère un snapshot des stats (pour loadSnapshot) */
   fetchOverview(): Observable<StatsOverview> {
     return this.http.get<StatsOverview>(`${this.baseUrl}/stats/overview`);
   }
 
-  /** Écoute le flux temps réel via Server-Sent Events (pour listenToStream) */
   listenToStream(): Observable<StatsOverview> {
     return new Observable<StatsOverview>((subscriber) => {
-      const url = `${this.baseUrl}/stats/stream`;
-      const source = new EventSource(url);
+      const source = new EventSource(`${this.baseUrl}/stats/stream`);
 
       source.onmessage = (event) => {
         try {
@@ -63,7 +76,6 @@ export class StatsService {
         subscriber.error(err);
       };
 
-      // cleanup quand l'observable est unsubscribed
       return () => {
         source.close();
       };

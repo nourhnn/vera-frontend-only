@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'; // 🔥 Très important !
 
 export interface VeraCheckResult {
   id: number;
@@ -17,9 +16,8 @@ export interface VeraCheckResult {
   providedIn: 'root',
 })
 export class VeraApiService {
-  // 🔥 En dev: http://localhost:3000/api
-  // 🔥 En prod: https://vera-groupe-2.onrender.com/api
-  private baseUrl = environment.apiUrl;
+  // 🔥 On pointe directement vers Render, en prod comme en dev
+  private baseUrl = 'https://vera-groupe-2.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
