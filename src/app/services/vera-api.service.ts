@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'; // 🔥 Très important !
 
 export interface VeraCheckResult {
   id: number;
@@ -16,7 +17,9 @@ export interface VeraCheckResult {
   providedIn: 'root',
 })
 export class VeraApiService {
-  private baseUrl = 'http://localhost:3000';
+  // 🔥 En dev: http://localhost:3000/api
+  // 🔥 En prod: https://vera-groupe-2.onrender.com/api
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +33,7 @@ export class VeraApiService {
     question: string,
     source: string = 'chat'
   ): Observable<VeraCheckResult> {
-    return this.http.post<VeraCheckResult>(`${this.baseUrl}/api/check`, {
+    return this.http.post<VeraCheckResult>(`${this.baseUrl}/check`, {
       question,
       source,
     });
@@ -38,7 +41,7 @@ export class VeraApiService {
 
   // 🔹 Historique des questions
   getQuestions(): Observable<VeraCheckResult[]> {
-    return this.http.get<VeraCheckResult[]>(`${this.baseUrl}/api/questions`);
+    return this.http.get<VeraCheckResult[]>(`${this.baseUrl}/questions`);
   }
 
   // 🔹 Login admin
@@ -47,7 +50,7 @@ export class VeraApiService {
     password: string
   ): Observable<{ success: boolean; token: string }> {
     return this.http.post<{ success: boolean; token: string }>(
-      `${this.baseUrl}/api/admin/login`,
+      `${this.baseUrl}/admin/login`,
       { email, password }
     );
   }
